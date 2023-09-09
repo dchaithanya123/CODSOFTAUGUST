@@ -1,53 +1,28 @@
-class QuizQuestion:
-    def _init_(self, question, choices, correct_answer):
-        self.question = question
-        self.choices = choices
-        self.correct_answer = correct_answer
-
-class QuizGame:
-    def _init_(self, questions):
-        self.questions = questions
-        self.score = 0
-    
-    def display_question(self, question_obj):
-        print(question_obj.question)
-        for i, choice in enumerate(question_obj.choices, start=1):
-            print(f"{i}. {choice}")
-    
-    def play(self):
-        print("Welcome to the Quiz Game!")
-        print("Rules: Select the correct answer for each question.")
-        print("-------------------------")
-        
-        for question_obj in self.questions:
-            self.display_question(question_obj)
-            user_answer = input("Your answer: ")
-            
-            if user_answer.isdigit():
-                user_answer = int(user_answer) - 1
-                if 0 <= user_answer < len(question_obj.choices):
-                    if question_obj.choices[user_answer] == question_obj.correct_answer:
-                        print("Correct!")
-                        self.score += 1
-                    else:
-                        print("Incorrect!")
-                        print(f"The correct answer is: {question_obj.correct_answer}")
-                else:
-                    print("Invalid choice.")
-            else:
-                print("Invalid input.")
-            print("-------------------------")
-        
-        print("Quiz completed!")
-        print(f"Your final score is: {self.score}/{len(self.questions)}")
-
-# Define quiz questions
-questions = [
-    QuizQuestion("What is the capital of France?", ["London", "Berlin", "Paris", "Madrid"], "Paris"),
-    QuizQuestion("Which planet is known as the Red Planet?", ["Mars", "Venus", "Jupiter", "Saturn"], "Mars"),
-    QuizQuestion("What is the largest mammal?", ["Elephant", "Giraffe", "Blue Whale", "Lion"], "Blue Whale")
-]
-
-# Create and play the quiz game
-quiz_game = QuizGame(questions)
-quiz_game.play()
+questions=("how many elements are there in the periodic table?:",
+           "Which animal lays the largest eggs?:",
+           "what is the abundant gas in the earth's atmosphere?",
+           "How many bones are there in human body?",
+           "which planet in the solar syatem is the hottest?")
+options=(("A.116","B.117","C.118","D.119"),
+         ("A.Whale","B.Crocodile","C.Elephant","D.Ostrich"),
+         ("A.Nitrogen","B.Oxygen","C.Carbon-dioxide","D.Hydrogen"),
+         ("A.206","B.207","C.208","D.209"),
+         ("A.Mercury","B.Venus","C.Earth","D.Mars"))
+answers=("C","D","A","A","B")
+guesses=[]
+score=0
+question_num=0
+for question in questions:
+    print("------------------------")
+    print(question)
+    for option in options[question_num]:
+        print(option)
+    guess=input("Enter(A,B,C,D):").upper()
+    guesses.append(guess)
+    if guess==answers[question_num]:
+        score+=1
+        print("CORRECT!")
+    else:
+        print("INCORRECT!")
+        print(f"{answers[question_num]}is the correct answer")
+    question_num+=1 
